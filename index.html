@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Hesapla</title>
+  <meta name="theme-color" content="#f3f3f6">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Hesapla">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <!-- Açılış ekranı: hesap makinesi seçimi -->
+  <section id="launcher" class="screen">
+    <button id="launcher-close" class="icon-btn launcher-close hidden" aria-label="Kapat">
+      <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="launcher-inner">
+      <h1>Hesap Makinesi Seç</h1>
+      <div class="app-grid" id="app-grid"></div>
+    </div>
+  </section>
+
+  <!-- Hesap makinesi ekranı -->
+  <section id="calc" class="screen hidden">
+    <nav class="rail">
+      <button class="icon-btn" id="menu-btn" aria-label="Menü">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <button class="rail-item" id="rail-tools" aria-label="Komutlar">
+        <svg viewBox="0 0 24 24"><path d="M5 19c4-1 5-14 9-14 2 0 3 3 5 3"/><circle cx="5" cy="19" r="1.6" class="fill"/></svg>
+        <span>Komutlar</span>
+      </button>
+      <button class="rail-item" id="rail-save" aria-label="Kaydet">
+        <svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5z"/><path d="M8 4v5h7V4M8 20v-6h8v6"/></svg>
+        <span>Kaydet</span>
+      </button>
+      <button class="rail-item" id="rail-undo" aria-label="Geri al">
+        <svg viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a5.5 5.5 0 010 11h-3"/></svg>
+        <span>Geri al</span>
+      </button>
+      <div class="rail-spacer"></div>
+      <div class="rail-title" id="rail-title"></div>
+    </nav>
+    <div id="ggb-holder" class="ggb-holder">
+      <div id="ggb-element"></div>
+      <div id="ggb-status" class="ggb-status">Yükleniyor…</div>
+    </div>
+  </section>
+
+  <!-- Yan menü -->
+  <div id="drawer-backdrop" class="backdrop hidden"></div>
+  <aside id="drawer" class="drawer" aria-hidden="true">
+    <div class="drawer-head" id="drawer-head">Hesapla</div>
+    <button class="drawer-item" data-action="clear">
+      <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>Tümünü Temizle</button>
+    <button class="drawer-item" data-action="open">
+      <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg>Aç</button>
+    <button class="drawer-item" data-action="save">
+      <svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5z"/><path d="M8 4v5h7V4M8 20v-6h8v6"/></svg>Kaydet</button>
+    <button class="drawer-item" data-action="export">
+      <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="1"/><path d="M4 16l5-5 4 4 3-3 4 4"/></svg>Resim Olarak Dışa Aktar</button>
+    <button class="drawer-item" data-action="share">
+      <svg viewBox="0 0 24 24"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M6 11H5v10h14V11h-1"/></svg>Paylaş</button>
+    <div class="drawer-sep"></div>
+    <button class="drawer-item" data-action="switch">
+      <svg viewBox="0 0 24 24"><path d="M12 3l8 5v8l-8 5-8-5V8z"/></svg>Hesap Makinesini Değiştir</button>
+    <button class="drawer-item" data-action="settings">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>Ayarlar</button>
+    <button class="drawer-item" data-action="help">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 114 2c-1 .7-1.5 1.2-1.5 2.5M12 17v.5"/></svg>Yardım</button>
+  </aside>
+
+  <!-- Diyalog -->
+  <div id="modal-backdrop" class="backdrop modal-backdrop hidden"></div>
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <h2 id="modal-title"></h2>
+    <div id="modal-body"></div>
+    <div class="modal-actions" id="modal-actions"></div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
